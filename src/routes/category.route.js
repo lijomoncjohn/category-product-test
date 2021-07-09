@@ -8,6 +8,10 @@ router
 	.post(categoryController.createCategory)
 	.get(categoryController.listCategory);
 
-router.route('/:categoryId').post(categoryController.createSecondCategory);
+router.route('/:categoryId/sub').post(categoryController.createSecondCategory);
+
+router
+	.route('/:categoryId/further')
+	.post(categoryController.createThirdCategory);
 
 module.exports = router;

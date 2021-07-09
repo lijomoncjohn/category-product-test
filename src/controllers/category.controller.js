@@ -107,13 +107,13 @@ module.exports = {
 				category = {
 					name: req.body.name,
 					url: `${rows[0].url}/${req.body.name.replace(/\s+/g, '-').toLowerCase()}`,
-					category_id: req.params.categoryId,
+					sub_category_id: req.params.categoryId,
 				};
 
 				console.log(category);
 
 				dbConnection.query(
-					'INSERT INTO sub_category SET ?',
+					'INSERT INTO further_category SET ?',
 					category,
 					function (err, result) {
 						if (err) {
