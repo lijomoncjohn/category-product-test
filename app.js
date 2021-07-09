@@ -6,6 +6,7 @@ const cors = require('cors');
 dotenv.config({ path: './src/config/config.env' });
 
 const categoryRoute = require('./src/routes/category.route');
+const productRoute = require('./src/routes/product.route');
 
 const app = express();
 
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use('/api/category', categoryRoute);
+app.use('/api/product', productRoute);
 
 const PORT = process.env.PORT || 3000;
 

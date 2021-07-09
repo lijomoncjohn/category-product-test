@@ -10,6 +10,8 @@ router
 
 router.route('/:categoryId/sub').post(categoryController.createSecondCategory);
 
+router.route('/:categoryId').put(categoryController.updateCategory);
+
 router
 	.route('/:categoryId/further')
 	.post(categoryController.createThirdCategory);

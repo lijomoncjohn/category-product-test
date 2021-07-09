@@ -5,7 +5,7 @@ module.exports = {
 		let product;
 
 		dbConnection.query(
-			`SELECT * FROM further_category  WHERE further_category_id=${req.params.categoryId}`,
+			`SELECT * FROM further_category  WHERE further_category_id=${req.body.categoryId}`,
 			function (err, rows) {
 				if (err) {
 					return res.status(404).json({
@@ -17,10 +17,8 @@ module.exports = {
 				product = {
 					name: req.body.name,
 					url: `${rows[0].url}/${req.body.name.replace(/\s+/g, '-').toLowerCase()}`,
-					further_category_id: req.params.categoryId,
+					further_category_id: req.body.categoryId,
 				};
-
-				console.log(category);
 
 				dbConnection.query(
 					'INSERT INTO products SET ?',
@@ -41,5 +39,20 @@ module.exports = {
 				);
 			}
 		);
+	},
+
+	listProducts: async (req, res, next) => {
+		dbConnection.query('SELECT * FROM products', function (err, rows) {
+			if (err) {
+				return res.status(400).json({
+					success: false,
+					messge: err.message,
+				});
+			}
+			res.status(200).json({
+				success: true,
+				data: rows,
+			});
+		});
 	},
 };
